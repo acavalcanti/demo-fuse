@@ -1,16 +1,41 @@
 = POC IPLAN
 
+Esse prova de conceito tem como objetivo mostrar a criação de um CRUD REST usando
+o Camel para integração das rotas, assim como mostrar como o ambiente é provisionado
+e mantido utilizando todo ambiente do Jboss Fuse.
+
+Objetivos para ser validado no CRUD REST:
+
+* Documentação de API
+* Gerenciamento de erro
+* Facilidade de criação
+* Alteração e deploy
+
 == Escopo
 
 image::images/fuse-lab1.png[]
 
-* CRUD Blog
+Para o passo a passo completo do setup desse exemplo, conferir a documentação: https://raw.githubusercontent.com/FuseByExample/rest-dsl-in-action
+
+== Rotas
+
+A tabela abaixo apresenta um sumários das rotas utilizadas
+
+|====
+| Rest URl | Operation | Route | Bean method | ElasticSearch Class Type
+| /blog/article/ | PUT | AddArticleToElasticRoute | ElasticSearchService.add() | IndexRequest
+| blog/article/search/user/{user} | GET | SearchArticleToElasticRoute | ElasticSearchService.getBlog() | GetResponse
+| blog/article/search/id/{id} | GET | SearchArticleToElasticRoute | ElasticSearchService.getBlogs() | SearchResponse
+| blog/article/{id} | DELETE | DeleteArticleToElasticRoute | ElasticSearchService.() | DeleteRequest
+|====
+
 
 == Instalação do fuse
 
   ./setup.sh
 
 === Automatico
+
   shell:source mvn:org.jboss.fuse/deployment/1.0/script/install
 
 === Manual
@@ -82,7 +107,7 @@ Acesso:
 
 === Popular em massa
 
-  cp /Users/haxor/Documents/demos/fuse/workspace-iplan/iplan-fuse/routing/src/data/articles/records.csv /Users/haxor/Documents/demos/fuse/jboss-fuse/instances/demo/articles/
+  cp routing/src/data/articles/records.csv instances/demo/articles/
 
 == Swagger
 
