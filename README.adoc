@@ -1,0 +1,105 @@
+= POC IPLAN
+
+== Escopo
+
+image::images/fuse-lab1.png[]
+
+* CRUD Blog
+
+== Instalação do fuse
+
+  ./setup.sh
+
+=== Automatico
+  shell:source mvn:org.jboss.fuse/deployment/1.0/script/install
+
+=== Manual
+
+==== Cria o Fabric
+
+  fabric:create --clean -m 127.0.0.1 -r manualip --wait-for-provisioning
+
+==== Edita o profile para ip local
+
+  fabric:profile-edit --pid io.fabric8.elasticsearch-insight/network.host=127.0.0.1 insight-elasticsearch.datastore
+
+==== Cria os containers elasticsearch e iplan
+
+  fabric:container-create-child --profile insight-elasticsearch.datastore root elasticsearch-node
+  fabric:container-create-child --profile feature-camel root iplan
+
+==== Deploy do profile iplan-fuse
+
+Dentro do projeto *routing*
+
+  mvn fabric8:deploy
+
+==== Adiciona o profile iplan-fuse no container demo
+
+  fabric:container-add-profile iplan iplan-fuse
+
+Para remover:
+
+  fabric:container-remove-profile iplan iplan-fuse
+
+=== ElasticSearch data maping
+
+  http PUT http://localhost:9200/blog
+  http PUT http://localhost:9200/blog/_mapping/article < data/elasticsearch/mapping.json
+  http http://localhost:9200/blog/_mapping/article
+
+== Start Kibana
+
+Dentro do kibana, executar:
+
+  mvn exec:java
+
+Acesso:
+
+  http://localhost:9090/index.html
+
+=== Cria o Dashboard
+
+  http PUT http://localhost:9200/kibana-int/dashboard/fusedemo < data/elasticsearch/dashboard.json
+
+== Popula ElasticSearch
+
+. Insere um usuário
+
+  http PUT http://localhost:8183/camel-rest/blog/article < data/elasticsearch/entry.json
+
+. Procura usuário *rramalho* pelo nome
+
+  http http://localhost:8183/camel-rest/blog/article/search/user/rramalho
+
+. Procura usuário com id 0
+
+  http http://localhost:8183/camel-rest/blog/article/search/id/0
+
+. Remove usuário
+
+  http DELETE http://localhost:8183/camel-rest/blog/article/0
+
+=== Popular em massa
+
+  cp /Users/haxor/Documents/demos/fuse/workspace-iplan/iplan-fuse/routing/src/data/articles/records.csv /Users/haxor/Documents/demos/fuse/jboss-fuse/instances/demo/articles/
+
+== Swagger
+
+  http://localhost:8183/hawtio-swagger
+
+  http://localhost:8183/rest/api-docs
+
+  {
+    "id": "21",
+    "user": "rramalho",
+    "body": "This is a blog article",
+    "title": "Title of the blog article",
+    "postDate": "2016-07-18T10:10"
+  }
+
+== Failure Kibana
+
+== Super basic
+
+  .get("hello").id("helo").description("Hello World").route().transform().constant("Hello World");
