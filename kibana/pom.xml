@@ -12,7 +12,7 @@
     <artifactId>kibana</artifactId>
     <version>1.0</version>
 
-    <name>IPLAN :: REST :: Kibana 3</name>
+    <name>DEMO :: REST :: Kibana 3</name>
 
     <properties>
         <jetty.port>9090</jetty.port>

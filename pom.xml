@@ -8,7 +8,7 @@
     <artifactId>camel-rest-dsl-demo</artifactId>
     <version>1.0</version>
 
-    <name>IPLAN :: REST :: Project</name>
+    <name>DEMO :: REST :: Project</name>
 
     <packaging>pom</packaging>
 

@@ -1,8 +1,8 @@
 # JBoss Fuse
 shell:source mvn:org.jboss.fuse/deployment/1.0/script/install
 fabric:container-list
-fabric:container-remove-profile iplan iplan-fuse
-fabric:container-add-profile iplan iplan-fuse
+fabric:container-remove-profile demo demo-fuse
+fabric:container-add-profile demo demo-fuse
 
 # Deploy profile
 cd routing

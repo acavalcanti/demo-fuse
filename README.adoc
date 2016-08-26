@@ -1,6 +1,6 @@
-= POC IPLAN
+= DEMO FUSE
 
-Esse prova de conceito tem como objetivo mostrar a criação de um CRUD REST usando
+Essa demonstração é baseada em uma prova de conceito utilizada para mostrar a criação de um CRUD REST usando
 o Camel para integração das rotas, assim como mostrar como o ambiente é provisionado
 e mantido utilizando todo ambiente do Jboss Fuse.
 
@@ -48,24 +48,24 @@ A tabela abaixo apresenta um sumários das rotas utilizadas
 
   fabric:profile-edit --pid io.fabric8.elasticsearch-insight/network.host=127.0.0.1 insight-elasticsearch.datastore
 
-==== Cria os containers elasticsearch e iplan
+==== Cria os containers elasticsearch e demo
 
   fabric:container-create-child --profile insight-elasticsearch.datastore root elasticsearch-node
-  fabric:container-create-child --profile feature-camel root iplan
+  fabric:container-create-child --profile feature-camel root demo
 
-==== Deploy do profile iplan-fuse
+==== Deploy do profile demo-fuse
 
 Dentro do projeto *routing*
 
   mvn fabric8:deploy
 
-==== Adiciona o profile iplan-fuse no container demo
+==== Adiciona o profile demo-fuse no container demo
 
-  fabric:container-add-profile iplan iplan-fuse
+  fabric:container-add-profile demo demo-fuse
 
 Para remover:
 
-  fabric:container-remove-profile iplan iplan-fuse
+  fabric:container-remove-profile demo demo-fuse
 
 === ElasticSearch data maping
 
@@ -93,9 +93,9 @@ Acesso:
 
   http PUT http://localhost:8183/camel-rest/blog/article < data/elasticsearch/entry.json
 
-. Procura usuário *rramalho* pelo nome
+. Procura usuário *acavalca* pelo nome
 
-  http http://localhost:8183/camel-rest/blog/article/search/user/rramalho
+  http http://localhost:8183/camel-rest/blog/article/search/user/acavalca
 
 . Procura usuário com id 0
 
@@ -117,7 +117,7 @@ Acesso:
 
   {
     "id": "21",
-    "user": "rramalho",
+    "user": "acavalca",
     "body": "This is a blog article",
     "title": "Title of the blog article",
     "postDate": "2016-07-18T10:10"

@@ -12,7 +12,7 @@
     <artifactId>deployment</artifactId>
     <version>1.0</version>
 
-    <name>IPLAN :: REST :: Deployment scripts</name>
+    <name>DEMO :: REST :: Deployment scripts</name>
 
     <build>
         <defaultGoal>install</defaultGoal>

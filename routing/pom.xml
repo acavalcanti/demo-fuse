@@ -12,13 +12,13 @@
 	<artifactId>routing</artifactId>
 	<version>1.0</version>
 
-	<name>IPLAN :: REST :: Routing</name>
+	<name>DEMO :: REST :: Routing</name>
 
 	<packaging>bundle</packaging>
 
 	<properties>
 		<!-- fabric8 deploy profile configuration -->
-		<fabric8.profile>iplan-fuse</fabric8.profile>
+		<fabric8.profile>demo-fuse</fabric8.profile>
 		<fabric8.parentProfiles>feature-camel</fabric8.parentProfiles>
 		<fabric8.bundles>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.json/20140107_1
 		</fabric8.bundles>
@@ -149,7 +149,7 @@
 				</executions>
 				<configuration>
 					<instructions>
-						<Bundle-SymbolicName>iplan-fuse</Bundle-SymbolicName>
+						<Bundle-SymbolicName>demo-fuse</Bundle-SymbolicName>
 						<Private-Package>org.jboss.fuse.*</Private-Package>
 						<Import-Package>
 							org.json;resolution:=optional,
